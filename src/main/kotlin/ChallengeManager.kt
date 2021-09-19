@@ -10,9 +10,9 @@ private var currentTime: Int = 0
 private val runnable : BukkitRunnable = object : BukkitRunnable(){
                                             override fun run() {
                                                 for(player in Bukkit.getOnlinePlayers()){
-                                                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent(shortInteger(currentTime)))
+                                                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent("§l"+shortInteger(currentTime)))
                                                 }
-
+                                                
                                                 currentTime += 1
                                             }
                                         }
@@ -23,6 +23,10 @@ fun setPlugin(plugin1: Plugin){
 
 fun startTimer(){
     runnable.runTaskTimer(plugin!!, 1, 20)
+}
+
+fun stopTimer(){
+    runnable.cancel()
 }
 
 fun shortInteger(duration: Int): String {
