@@ -1,32 +1,22 @@
-import net.md_5.bungee.api.ChatMessageType
-import net.md_5.bungee.api.chat.TextComponent
+import challengetypes.NoCraftingTable
 import org.bukkit.plugin.Plugin
-import org.bukkit.scheduler.BukkitRunnable
-import org.bukkit.*
 
 private var plugin: Plugin? = null
 private var currentTime: Int = 0
 
-private val runnable : BukkitRunnable = object : BukkitRunnable(){
-                                            override fun run() {
-                                                for(player in Bukkit.getOnlinePlayers()){
-                                                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent("§l"+shortInteger(currentTime)))
-                                                }
-                                                
-                                                currentTime += 1
-                                            }
-                                        }
+private var currentGame: Game = Game(plugin!!)
 
 fun setPlugin(plugin1: Plugin){
     plugin = plugin1
 }
 
-fun startTimer(){
-    runnable.runTaskTimer(plugin!!, 1, 20)
+fun startTimer(): Boolean{
+    currentGame = Game(plugin!!)
+    return currentGame.start()
 }
 
-fun stopTimer(){
-    runnable.cancel()
+fun stopTimer(): Boolean {
+    return currentGame.stop()
 }
 
 fun shortInteger(duration: Int): String {
