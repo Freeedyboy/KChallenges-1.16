@@ -1,10 +1,11 @@
 import challengetypes.NoCraftingTable
 import org.bukkit.plugin.Plugin
+import java.util.*
 
 private var plugin: Plugin? = null
 private var currentTime: Int = 0
-
-private var currentGame: Game = Game(plugin!!)
+private var challenges:LinkedList<ChallengeType> = LinkedList()
+private var currentGame: Game? = null
 
 fun setPlugin(plugin1: Plugin){
     plugin = plugin1
@@ -12,11 +13,27 @@ fun setPlugin(plugin1: Plugin){
 
 fun startTimer(): Boolean{
     currentGame = Game(plugin!!)
-    return currentGame.start()
+    return currentGame!!.start()
 }
 
 fun stopTimer(): Boolean {
-    return currentGame.stop()
+    return currentGame!!.stop()
+}
+
+fun isRunning(): Boolean{
+    return currentGame!!.isRunning()
+}
+
+fun enableChallenge(challengeType: ChallengeType){
+    challenges.add(challengeType)
+}
+
+fun retrieveChallenges(){
+    for(challenge in challenges){
+        if(challenge == ChallengeType.NOCRAFTINGTABLE){
+            plugin!!.server.pluginManager.registerEvents(NoCraftingTable(), plugin!!)
+        }
+    }
 }
 
 fun shortInteger(duration: Int): String {

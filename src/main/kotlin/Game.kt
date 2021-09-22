@@ -22,6 +22,7 @@ class Game(private val plugin: Plugin) {
     fun start(): Boolean{
         return if(!running) {
             runnable.runTaskTimer(plugin, 1, 20)
+            running = true
             true
         }else{
             false
@@ -31,9 +32,14 @@ class Game(private val plugin: Plugin) {
     fun stop(): Boolean{
         return if(running) {
             runnable.cancel()
+            running = false
             true
         }else{
             false
         }
+    }
+
+    fun isRunning(): Boolean{
+        return running
     }
 }

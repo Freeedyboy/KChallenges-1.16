@@ -9,6 +9,8 @@ open class Challenges: JavaPlugin() {
     override fun onEnable() {
         Bukkit.broadcastMessage("Lade gerade ihr Bastarde")
 
+        this.server.pluginManager.registerEvents(FürFabiDerBastard(), this)
+
         setPlugin(this)
         this.getCommand("startgame")?.setExecutor(StartStopGameCommand())
         this.getCommand("stopgame")?.setExecutor(StartStopGameCommand())
