@@ -1,4 +1,3 @@
 enum class ChallengeType {
-
-    NOCRAFTINGTABLE
+    NOCRAFTINGTABLE,
 }

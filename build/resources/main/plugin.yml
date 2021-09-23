@@ -7,3 +7,5 @@ commands:
     description: starts the challenge
   stopgame:
     description: stops the challenge
+  challenges:
+    description: challengemenu
