@@ -9,17 +9,20 @@ import isEnabled
 import cancelTimer
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
+import org.bukkit.event.HandlerList
 
 open class NoCraftingTable(): Listener {
     @EventHandler
     fun onCrafting(event: CraftItemEvent){
-        if(event.clickedInventory != event.whoClicked.inventory){
-            if(isEnabled(Challen*geType.NOCRAFTINGTABLE)){
+        if(event.clickedInventory!!.type == org.bukkit.event.inventory.InventoryType.CRAFTING){
+            if(isEnabled(ChallengeType.NOCRAFTINGTABLE)){
                 cancelTimer(event.whoClicked as Player, "hat etwas gecraftet")
 
                 for(player in Bukkit.getOnlinePlayers()){
                     player.gameMode = GameMode.SPECTATOR
                 }
+
+                HandlerList.unregisterAll(this)
             }
         }
     }

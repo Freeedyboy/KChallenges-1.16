@@ -7,6 +7,8 @@ import org.bukkit.event.inventory.InventoryType
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import java.util.*
+import isEnabled
+import disableChallenge
 
 class ChallengeMenu : Listener{
 
@@ -15,7 +17,9 @@ class ChallengeMenu : Listener{
 
     constructor(){
         inventory.setItem(10, SLJKAHDBOIJKSAHBNDPIASHBDUI.createGuiItem(Material.CRAFTING_TABLE, "No Crafting Table", "Man darf keinen Crafting Table benutzen", "Status: "+if(isEnabled(ChallengeType.NOCRAFTINGTABLE)) "An" else "Aus"))
+        inventory.setItem(11, SLJKAHDBOIJKSAHBNDPIASHBDUI.createGuiItem(Material.FEATHER, "More Knockback", "Jeder Spieler hat 20mal mehr Knockback", "Status: "+if(isEnabled(ChallengeType.MOREKNOCKBACK)) "An" else "Aus"))
         hashmap.put(Material.CRAFTING_TABLE, ChallengeType.NOCRAFTINGTABLE)
+        hashmap.put(Material.FEATHER, ChallengeType.MOREKNOCKBACK)
     }
 
     fun getInventory(): Inventory{
@@ -38,6 +42,15 @@ class ChallengeMenu : Listener{
                 disableChallenge(hashmap.get(Material.CRAFTING_TABLE)!!)
 
             inventory.setItem(10, SLJKAHDBOIJKSAHBNDPIASHBDUI.createGuiItem(Material.CRAFTING_TABLE, "No Crafting Table", "Man darf keinen Crafting Table benutzen", "Status: "+if(isEnabled(ChallengeType.NOCRAFTINGTABLE)) "An" else "Aus"))
+            event.whoClicked.sendMessage("Die Challenge wurde "+if(isEnabled(ChallengeType.NOCRAFTINGTABLE)) "An" else {"Aus"}+" gemacht")
+        }
+        else if(item!!.type == Material.FEATHER){
+            if(!isEnabled(ChallengeType.MOREKNOCKBACK))
+                enableChallenge(hashmap.get(Material.FEATHER)!!)
+            else
+                disableChallenge(hashmap.get(Material.FEATHER)!!)
+
+            inventory.setItem(11, SLJKAHDBOIJKSAHBNDPIASHBDUI.createGuiItem(Material.FEATHER, "More Knockback", "Jeder Spieler hat 20mal mehr Knockback", "Status: "+if(isEnabled(ChallengeType.MOREKNOCKBACK)) "An" else "Aus"))
             event.whoClicked.sendMessage("Die Challenge wurde "+if(isEnabled(ChallengeType.NOCRAFTINGTABLE)) "An" else {"Aus"}+" gemacht")
         }
     }

@@ -11,17 +11,27 @@ class Game(private val plugin: Plugin) {
 
     private val runnable : BukkitRunnable = object : BukkitRunnable(){
         override fun run() {
-            for(player in Bukkit.getOnlinePlayers()){
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent("§l"+shortInteger(currentTime)))
-            }
+            if(isRunning()) {
+                for (player in Bukkit.getOnlinePlayers()) {
+                    player.spigot()
+                        .sendMessage(ChatMessageType.ACTION_BAR, TextComponent("§l" + shortInteger(currentTime)))
+                }
 
-            currentTime += 1
+                currentTime += 1
+            }else{
+                for(player in Bukkit.getOnlinePlayers()){
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent("Der Timer ist gerade pausiert"))
+                }
+            }
         }
+    }
+
+    fun onReload(){
+        runnable.runTaskTimer(plugin, 1, 20)
     }
 
     fun start(): Boolean{
         return if(!running) {
-            runnable.runTaskTimer(plugin, 1, 20)
             running = true
             true
         }else{
@@ -31,7 +41,6 @@ class Game(private val plugin: Plugin) {
 
     fun stop(): Boolean{
         return if(running) {
-            runnable.cancel()
             running = false
             true
         }else{

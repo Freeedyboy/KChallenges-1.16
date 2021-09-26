@@ -1,3 +1,4 @@
+import challengetypes.MoreKnockBackChallenge
 import challengetypes.NoCraftingTable
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
@@ -9,21 +10,26 @@ private var plugin: Plugin? = null
 private var challenges:HashMap<ChallengeType, Boolean> = HashMap()
 private var currentGame: Game? = null
 private val noCraftingTable: NoCraftingTable = NoCraftingTable()
+private val moreKnockBackChallenge: MoreKnockBackChallenge = MoreKnockBackChallenge()
 
 fun setPlugin(plugin1: Plugin){
     plugin = plugin1
 }
 
 fun startTimer(): Boolean{
-    currentGame = Game(plugin!!)
     retrieveChallenges()
     return currentGame!!.start()
+}
+
+fun onReload(){
+    currentGame = Game(plugin!!)
+    currentGame!!.onReload()
 }
 
 fun cancelTimer(player: Player, cause: String): Boolean {
     Bukkit.broadcastMessage("------------Challenge------------\n" +
                             "der Timer wurde gestoppt\n" +
-                            "${player.name} $cause" +
+                            "${player.name} $cause\n" +
                             "---------------------------------")
     return currentGame!!.stop()
 }
@@ -67,6 +73,12 @@ fun retrieveChallenges(){
                 plugin!!.server.pluginManager.registerEvents(noCraftingTable, plugin!!)
             }else{
                 HandlerList.unregisterAll(noCraftingTable)
+            }
+        }else if(challenge == ChallengeType.MOREKNOCKBACK) {
+            if (challenges.get(challenge)!!) {
+                plugin!!.server.pluginManager.registerEvents(moreKnockBackChallenge, plugin!!)
+            } else {
+                HandlerList.unregisterAll(moreKnockBackChallenge)
             }
         }
     }

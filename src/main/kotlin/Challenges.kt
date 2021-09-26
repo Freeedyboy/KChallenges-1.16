@@ -12,6 +12,8 @@ open class Challenges: JavaPlugin() {
         Bukkit.broadcastMessage("Lade gerade ihr Bastarde")
 
         setPlugin(this)
+        onReload()
+        this.server.pluginManager.registerEvents(GeneralListener(), this)
         this.getCommand("startgame")?.setExecutor(StartStopGameCommand())
         this.getCommand("stopgame")?.setExecutor(StartStopGameCommand())
         this.getCommand("challenges")?.setExecutor(ChallengesCommand(this))
