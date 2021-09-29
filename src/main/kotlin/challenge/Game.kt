@@ -1,3 +1,5 @@
+package challenge
+
 import net.md_5.bungee.api.ChatMessageType
 import net.md_5.bungee.api.chat.TextComponent
 import org.bukkit.Bukkit
@@ -20,7 +22,7 @@ class Game(private val plugin: Plugin) {
                 currentTime += 1
             }else{
                 for(player in Bukkit.getOnlinePlayers()){
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent("Der Timer ist gerade pausiert"))
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent("§oDer Timer ist gerade pausiert"))
                 }
             }
         }
@@ -46,6 +48,14 @@ class Game(private val plugin: Plugin) {
         }else{
             false
         }
+    }
+
+    fun getTime(): Int{
+        return currentTime
+    }
+
+    fun getTimeAsString(): String{
+        return shortInteger(currentTime)
     }
 
     fun isRunning(): Boolean{

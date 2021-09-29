@@ -1,3 +1,5 @@
+import challenge.ChallengeType
+import challenge.Game
 import challengetypes.MoreKnockBackChallenge
 import challengetypes.NoCraftingTable
 import org.bukkit.Bukkit
@@ -27,14 +29,32 @@ fun onReload(){
 }
 
 fun cancelTimer(player: Player, cause: String): Boolean {
-    Bukkit.broadcastMessage("------------Challenge------------\n" +
-                            "der Timer wurde gestoppt\n" +
-                            "${player.name} $cause\n" +
-                            "---------------------------------")
+    Bukkit.broadcastMessage("§8------------§9Challenge§8------------\n" +
+                            "§cder Timer wurde gestoppt\n" +
+                            "§c${player.name} $cause\n" +
+                            "§7Ihr habt ${currentGame!!.getTimeAsString()} verschwendet" +
+                            "§8--------------------------------------")
+
+    for(keys in challenges.keys){
+        if(challenges.get(keys) == true){
+            challenges.replace(keys, false)
+        }
+    }
+
+    retrieveChallenges()
+
     return currentGame!!.stop()
 }
 
 fun stopTimer(): Boolean {
+    for(keys in challenges.keys){
+        if(challenges.get(keys) == true){
+            challenges.replace(keys, false)
+        }
+    }
+
+    retrieveChallenges()
+
     return currentGame!!.stop()
 }
 

@@ -10,6 +10,7 @@ import cancelTimer
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.event.HandlerList
+import challenge.ChallengeType
 
 open class NoCraftingTable(): Listener {
     @EventHandler

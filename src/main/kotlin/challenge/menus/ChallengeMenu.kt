@@ -1,3 +1,7 @@
+package challenge.menus
+
+import SLJKAHDBOIJKSAHBNDPIASHBDUI
+import challenge.ChallengeType
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -9,6 +13,7 @@ import org.bukkit.inventory.ItemStack
 import java.util.*
 import isEnabled
 import disableChallenge
+import enableChallenge
 
 class ChallengeMenu : Listener{
 
@@ -16,8 +21,22 @@ class ChallengeMenu : Listener{
     private val hashmap: HashMap<Material, ChallengeType> = HashMap()
 
     constructor(){
-        inventory.setItem(10, SLJKAHDBOIJKSAHBNDPIASHBDUI.createGuiItem(Material.CRAFTING_TABLE, "No Crafting Table", "Man darf keinen Crafting Table benutzen", "Status: "+if(isEnabled(ChallengeType.NOCRAFTINGTABLE)) "An" else "Aus"))
-        inventory.setItem(11, SLJKAHDBOIJKSAHBNDPIASHBDUI.createGuiItem(Material.FEATHER, "More Knockback", "Jeder Spieler hat 20mal mehr Knockback", "Status: "+if(isEnabled(ChallengeType.MOREKNOCKBACK)) "An" else "Aus"))
+        inventory.setItem(10,
+            SLJKAHDBOIJKSAHBNDPIASHBDUI.createGuiItem(
+                Material.CRAFTING_TABLE,
+                "§aNo Crafting Table",
+                "§7Man darf keinen Crafting Table benutzen",
+                "§7Status: " + if (isEnabled(ChallengeType.NOCRAFTINGTABLE)) "§aAn" else "§cAus"
+            )
+        )
+        inventory.setItem(11,
+            SLJKAHDBOIJKSAHBNDPIASHBDUI.createGuiItem(
+                Material.FEATHER,
+                "§aMore Knockback",
+                "§7Jeder Spieler hat 20mal mehr Knockback",
+                "§7Status: " + if (isEnabled(ChallengeType.MOREKNOCKBACK)) "§aAn" else "§cAus"
+            )
+        )
         hashmap.put(Material.CRAFTING_TABLE, ChallengeType.NOCRAFTINGTABLE)
         hashmap.put(Material.FEATHER, ChallengeType.MOREKNOCKBACK)
     }
@@ -41,7 +60,14 @@ class ChallengeMenu : Listener{
             else
                 disableChallenge(hashmap.get(Material.CRAFTING_TABLE)!!)
 
-            inventory.setItem(10, SLJKAHDBOIJKSAHBNDPIASHBDUI.createGuiItem(Material.CRAFTING_TABLE, "No Crafting Table", "Man darf keinen Crafting Table benutzen", "Status: "+if(isEnabled(ChallengeType.NOCRAFTINGTABLE)) "An" else "Aus"))
+            inventory.setItem(10,
+                SLJKAHDBOIJKSAHBNDPIASHBDUI.createGuiItem(
+                    Material.CRAFTING_TABLE,
+                    "§aNo Crafting Table",
+                    "§7Man darf keinen Crafting Table benutzen",
+                    "§7Status: " + if (isEnabled(ChallengeType.NOCRAFTINGTABLE)) "§aAn" else "§cAus"
+                )
+            )
             event.whoClicked.sendMessage("Die Challenge wurde "+if(isEnabled(ChallengeType.NOCRAFTINGTABLE)) "An" else {"Aus"}+" gemacht")
         }
         else if(item!!.type == Material.FEATHER){
@@ -50,8 +76,15 @@ class ChallengeMenu : Listener{
             else
                 disableChallenge(hashmap.get(Material.FEATHER)!!)
 
-            inventory.setItem(11, SLJKAHDBOIJKSAHBNDPIASHBDUI.createGuiItem(Material.FEATHER, "More Knockback", "Jeder Spieler hat 20mal mehr Knockback", "Status: "+if(isEnabled(ChallengeType.MOREKNOCKBACK)) "An" else "Aus"))
-            event.whoClicked.sendMessage("Die Challenge wurde "+if(isEnabled(ChallengeType.NOCRAFTINGTABLE)) "An" else {"Aus"}+" gemacht")
+            inventory.setItem(11,
+                SLJKAHDBOIJKSAHBNDPIASHBDUI.createGuiItem(
+                    Material.FEATHER,
+                    "§aMore Knockback",
+                    "§7Jeder Spieler hat 20mal mehr Knockback",
+                    "§7Status: " + if (isEnabled(ChallengeType.MOREKNOCKBACK)) "§aAn" else "§cAus"
+                )
+            )
+            event.whoClicked.sendMessage("Die Challenge wurde "+if(isEnabled(ChallengeType.MOREKNOCKBACK)) "An" else {"Aus"}+" gemacht")
         }
     }
 
