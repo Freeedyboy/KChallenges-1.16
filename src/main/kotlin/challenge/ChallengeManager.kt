@@ -9,7 +9,7 @@ import org.bukkit.plugin.Plugin
 import java.util.*
 
 private var plugin: Plugin? = null
-private var challenges:HashMap<ChallengeType, Boolean> = HashMap()
+private var challenges: HashMap<ChallengeType, Boolean> = HashMap()
 private var currentGame: Game? = null
 private val noCraftingTable: NoCraftingTable = NoCraftingTable()
 private val moreKnockBackChallenge: MoreKnockBackChallenge = MoreKnockBackChallenge()
