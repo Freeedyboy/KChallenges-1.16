@@ -16,10 +16,12 @@ class StartStopGameCommand: CommandExecutor {
             if(startTimer()){
                 for(player in Bukkit.getOnlinePlayers()){
                     player.sendTitle("Der Timer", "wurde gestartet", 5, 40, 5)
+                    player.sendMessage("Das Spiel wurde mit den Challenges ")
+
                     player.playSound(player.location, Sound.ENTITY_PLAYER_LEVELUP, 5f, 5f)
+
                     player.foodLevel = 20
                     player.health = 20.0
-                    player.teleport(player.world.spawnLocation)
                 }
             }
         }else if (p1.name == "stopgame"){
