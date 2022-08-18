@@ -83,7 +83,19 @@ fun disableChallenge(challengeType: ChallengeType){
         challenges.put(challengeType, false)
     }else{
         challenges.replace(challengeType, false)
+
     }
+}
+
+fun getEnabledChallengesAsString(): String{
+    var rString = "";
+
+    for(key in challenges.keys){
+        if(challenges.get(key)!!){
+            rString.plus("$key ")
+        }
+    }
+    return rString
 }
 
 fun retrieveChallenges(){

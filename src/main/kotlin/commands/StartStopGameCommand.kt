@@ -1,5 +1,6 @@
 package commands
 
+import getEnabledChallengesAsString
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Sound
@@ -16,7 +17,7 @@ class StartStopGameCommand: CommandExecutor {
             if(startTimer()){
                 for(player in Bukkit.getOnlinePlayers()){
                     player.sendTitle("Der Timer", "wurde gestartet", 5, 40, 5)
-                    player.sendMessage("Das Spiel wurde mit den Challenges ")
+                    player.sendMessage("Das Spiel wurde mit den Challenges ${getEnabledChallengesAsString()} gestartet")
 
                     player.playSound(player.location, Sound.ENTITY_PLAYER_LEVELUP, 5f, 5f)
 
