@@ -1,6 +1,6 @@
 package challenge.menus
 
-import SLJKAHDBOIJKSAHBNDPIASHBDUI
+import CreateGUIItem
 import challenge.ChallengeType
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -22,7 +22,7 @@ class ChallengeMenu : Listener{
 
     constructor(){
         inventory.setItem(10,
-            SLJKAHDBOIJKSAHBNDPIASHBDUI.createGuiItem(
+            CreateGUIItem.createGuiItem(
                 Material.CRAFTING_TABLE,
                 "§aNo Crafting Table",
                 "§7Man darf keinen Crafting Table benutzen",
@@ -30,7 +30,7 @@ class ChallengeMenu : Listener{
             )
         )
         inventory.setItem(11,
-            SLJKAHDBOIJKSAHBNDPIASHBDUI.createGuiItem(
+            CreateGUIItem.createGuiItem(
                 Material.FEATHER,
                 "§aMore Knockback",
                 "§7Jeder Spieler hat 20mal mehr Knockback",
@@ -61,7 +61,7 @@ class ChallengeMenu : Listener{
                 disableChallenge(hashmap.get(Material.CRAFTING_TABLE)!!)
 
             inventory.setItem(10,
-                SLJKAHDBOIJKSAHBNDPIASHBDUI.createGuiItem(
+                CreateGUIItem.createGuiItem(
                     Material.CRAFTING_TABLE,
                     "§aNo Crafting Table",
                     "§7Man darf keinen Crafting Table benutzen",
@@ -77,7 +77,7 @@ class ChallengeMenu : Listener{
                 disableChallenge(hashmap.get(Material.FEATHER)!!)
 
             inventory.setItem(11,
-                SLJKAHDBOIJKSAHBNDPIASHBDUI.createGuiItem(
+                CreateGUIItem.createGuiItem(
                     Material.FEATHER,
                     "§aMore Knockback",
                     "§7Jeder Spieler hat 20mal mehr Knockback",
