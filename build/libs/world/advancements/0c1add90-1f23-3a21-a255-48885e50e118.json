@@ -1,0 +1,10 @@
+{
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:forest": "2022-08-22 18:53:29 +0200",
+      "minecraft:mountains": "2022-08-22 19:01:13 +0200"
+    },
+    "done": false
+  },
+  "DataVersion": 2586
+}

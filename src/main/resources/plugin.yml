@@ -9,3 +9,7 @@ commands:
     description: stops the challenge
   challenges:
     description: challengemenu
+  restartserver:
+    description: kpdiggo
+  settings:
+    description: settings

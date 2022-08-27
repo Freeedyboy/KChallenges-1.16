@@ -1,5 +1,6 @@
 package challengetypes
 
+import challenge.Challenge
 import org.bukkit.entity.Entity
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -8,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.util.Vector
 
 
-class MoreKnockBackChallenge: Listener {
+class MoreKnockBackChallenge: Listener, Challenge() {
 
     @EventHandler
     fun onEntityDamage(event: EntityDamageEvent){
@@ -22,5 +23,9 @@ class MoreKnockBackChallenge: Listener {
         val p: Entity = event.entity
 
         p.velocity = event.damager.location.direction.setY(0).normalize().multiply(20)
+    }
+
+    override fun onStart() {
+
     }
 }

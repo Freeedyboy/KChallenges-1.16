@@ -1,8 +1,10 @@
 package challengetypes
 
-import org.bukkit.event.EventHandler
+import challenge.Challenge
 import org.bukkit.event.Listener
 
-class NoDamageChallenge: Listener {
-
+class NoDamageChallenge: Listener, Challenge() {
+    override fun onStart() {
+        TODO("Not yet implemented")
+    }
 }

@@ -31,8 +31,8 @@ fun onReload(){
 fun cancelTimer(player: Player, cause: String): Boolean {
     Bukkit.broadcastMessage("§8------------§9Challenge§8------------\n" +
                             "§cder Timer wurde gestoppt\n" +
-                            "§c${player.name} $cause\n" +
-                            "§7Ihr habt ${currentGame!!.getTimeAsString()} verschwendet" +
+                            "§c${player.name} $cause \n" +
+                            "§7Ihr habt ${currentGame!!.getTimeAsString()} verschwendet\n" +
                             "§8--------------------------------------")
 
     for(keys in challenges.keys){
@@ -88,7 +88,7 @@ fun disableChallenge(challengeType: ChallengeType){
 }
 
 fun getEnabledChallengesAsString(): String{
-    var rString = "";
+    val rString = "";
 
     for(key in challenges.keys){
         if(challenges.get(key)!!){

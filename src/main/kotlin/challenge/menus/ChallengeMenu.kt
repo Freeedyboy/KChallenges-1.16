@@ -1,6 +1,6 @@
 package challenge.menus
 
-import CreateGUIItem
+import CreateGUIItem.createGuiItem
 import challenge.ChallengeType
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -14,15 +14,17 @@ import java.util.*
 import isEnabled
 import disableChallenge
 import enableChallenge
+import org.bukkit.event.HandlerList
+import org.bukkit.event.inventory.InventoryCloseEvent
 
 class ChallengeMenu : Listener{
 
-    private var inventory: Inventory = Bukkit.createInventory(null, InventoryType.BARREL, "Challenges")
+    private var inventory: Inventory = Bukkit.createInventory(null, 36, "Challenges")
     private val hashmap: HashMap<Material, ChallengeType> = HashMap()
 
     constructor(){
         inventory.setItem(10,
-            CreateGUIItem.createGuiItem(
+            createGuiItem(
                 Material.CRAFTING_TABLE,
                 "§aNo Crafting Table",
                 "§7Man darf keinen Crafting Table benutzen",
@@ -30,7 +32,7 @@ class ChallengeMenu : Listener{
             )
         )
         inventory.setItem(11,
-            CreateGUIItem.createGuiItem(
+            createGuiItem(
                 Material.FEATHER,
                 "§aMore Knockback",
                 "§7Jeder Spieler hat 20mal mehr Knockback",
@@ -61,7 +63,7 @@ class ChallengeMenu : Listener{
                 disableChallenge(hashmap.get(Material.CRAFTING_TABLE)!!)
 
             inventory.setItem(10,
-                CreateGUIItem.createGuiItem(
+                createGuiItem(
                     Material.CRAFTING_TABLE,
                     "§aNo Crafting Table",
                     "§7Man darf keinen Crafting Table benutzen",
@@ -70,14 +72,14 @@ class ChallengeMenu : Listener{
             )
             event.whoClicked.sendMessage("Die Challenge wurde "+if(isEnabled(ChallengeType.NOCRAFTINGTABLE)) "An" else {"Aus"}+" gemacht")
         }
-        else if(item!!.type == Material.FEATHER){
+        else if(item.type == Material.FEATHER){
             if(!isEnabled(ChallengeType.MOREKNOCKBACK))
                 enableChallenge(hashmap.get(Material.FEATHER)!!)
             else
                 disableChallenge(hashmap.get(Material.FEATHER)!!)
 
             inventory.setItem(11,
-                CreateGUIItem.createGuiItem(
+                createGuiItem(
                     Material.FEATHER,
                     "§aMore Knockback",
                     "§7Jeder Spieler hat 20mal mehr Knockback",
@@ -88,5 +90,10 @@ class ChallengeMenu : Listener{
         }
     }
 
-
+    @EventHandler
+    fun inventoryCloseEvent(event: InventoryCloseEvent){
+        if(event.inventory == this.inventory){
+            HandlerList.unregisterAll(this)
+        }
+    }
 }
